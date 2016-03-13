@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "gulp"
   },
   "author": "",
   "license": "ISC",
@@ -25,9 +25,11 @@
     "jshint": "^2.9.1",
     "jshint-stylish": "^2.1.0",
     "lodash": "^4.6.1",
-    "moment": "^2.12.0",
     "q": "^1.4.1",
     "q-io": "^1.13.2",
     "run-sequence": "^1.1.5"
+  },
+  "dependencies": {
+    "moment": "^2.12.0"
   }
 }
