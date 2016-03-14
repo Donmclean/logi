@@ -25,7 +25,7 @@ gulp.task('build', () => {
 
     try {
 
-        gulp.src([src+'/*'])
+        gulp.src([src+'/config.js', src+'/base.js', src+'/actions.js', src+'/index.js'])
             .pipe($.plumber())
             .pipe($.jshint())
             .pipe($.jshint.reporter('jshint-stylish'))
