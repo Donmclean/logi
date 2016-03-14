@@ -4,7 +4,7 @@
   "description": "Module for logging in your node environment.",
   "main": "index.js",
   "scripts": {
-    "start": "gulp"
+    "start": "node tests/tests.js"
   },
   "author": "Don Mclean",
   "license": "MIT",
