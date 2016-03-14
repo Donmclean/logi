@@ -2,7 +2,7 @@
  * Created by donmclean on 3/13/16.
  */
 
-const logi = require('./index');
+const logi = require('../index');
 
 //BASIC LOG
 logi.log('BASIC LOG');

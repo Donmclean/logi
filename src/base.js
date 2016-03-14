@@ -11,7 +11,7 @@ module.exports = () => {
 
         let date = Date.now();
 
-        date = config.moment(date).format('MM/DD/YY ~ HH:mm:s');
+        date = config.moment(date).format('MM/DD/YY ~ HH:mm:ss');
 
         return `[${config.chalk.gray(date)}]`;
     };
