@@ -2,7 +2,6 @@
  * Created by donmclean on 4/18/16.
  */
 
-"use strict";
 const
     gulp            = require('gulp'),
     $               = require('gulp-load-plugins')({lazy: true, DEBUG: false, scope: ['devDependencies']}),
