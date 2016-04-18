@@ -1,4 +1,8 @@
+language: node_js
+node_js:
+  - "5"
+before_script:
+  - npm install -g gulp
 install:
   - npm install
-  - brew upgrade node
 script: npm start
