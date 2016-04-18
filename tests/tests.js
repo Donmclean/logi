@@ -16,5 +16,7 @@ logi.error('ERROR LOG');
 //INFO LOG
 logi.info('INFO LOG');
 
-logi.mixed([{color: 'red', bgColor: 'bgGreen',modifier: 'underline', value: 'this is a testccc'},
-    {color: 'black', bgColor: 'bgRed', modifier: 'bold', value: 'this is a aaaaaaa'}]);
+// logi.mixed([{color: 'red', bgColor: 'bgGreen',modifier: ['underline'], value: 'this is a testccc'}]);
+
+logi.mixed([{color: 'red', bgColor: 'bgGreen',modifier: ['underline'], value: 'this is a testccc'},
+    {color: 'black', bgColor: 'bgRed', modifier: ['bold','underline'], value: 'this is a aaaaaaa'}]);

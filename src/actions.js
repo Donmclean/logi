@@ -117,15 +117,17 @@ module.exports = () => {
                     }
                     case 'modifier': {
                         let error = true;
+                        actionList['modifier'] = [];
 
                         config._.forEach(actions.modifiers, modifier => {
-                            if(modifier === obj.modifier) {
-                                actionList['modifier'] = modifier;
-                                //actionList['modifier'] += [modifier];
+                            config._.forEach(obj.modifier, modifier2 => {
+                                if(modifier === modifier2) {
+                                    actionList['modifier'].push(modifier2);
 
-                                error = false;
-                                return false;
-                            }
+                                    error = false;
+                                    return false;
+                                }
+                            });
                         });
 
                         if(!!error) {
@@ -153,7 +155,7 @@ module.exports = () => {
                 actionList['modifier'] = actions.defaultModifier;
             }
 
-            let x = config._
+            let options = config._
                 .chain(config._.keys(obj))
                 .filter(key => {
                     return key !== 'value';
@@ -162,20 +164,22 @@ module.exports = () => {
                     return `${actionList[key]}`;
                 })
                 .value();
-            switch (x.length) {
-                case 1: {
-                    console.log(config.chalk[`${x[0]}`](obj.value));
-                    break;
+
+            let str = 'config.chalk.';
+
+            config._.forEach(options, (task, i) => {
+                task = task.replace(',','.');
+                if(i === options.length -1) {
+                    str += task;
+                } else {
+                    str += task + '.';
                 }
-                case 2: {
-                    console.log(config.chalk[`${x[0]}`][`${x[1]}`](obj.value));
-                    break;
-                }
-                case 3: {
-                    console.log(config.chalk[`${x[0]}`][`${x[1]}`][`${x[2]}`](obj.value));
-                    break;
-                }
-            }
+            });
+
+            str += `('${obj.value}')`;
+
+            console.log('str',str);
+            console.log(`${eval(str)}`);
             
             actionList = [];
             reset = false;
