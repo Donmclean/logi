@@ -55,7 +55,9 @@ module.exports = () => {
 
     //eg: [{color: 'red', bgColor: 'bgBlack', modifier: 'bold', value: 'this is a test'}]
     actions.mixed = (arr) => {
-        let actionList = [],
+        let
+            mixedStr = [],
+            actionList = [],
             reset = false;
 
         if(!config._.isArray(arr) || !arr) {
@@ -70,10 +72,7 @@ module.exports = () => {
             })
             .value();
 
-        console.log('arr',arr);
-
         config._.forEach(arr, obj => {
-            console.log('config._.keys(obj)',config._.keys(obj));
             config._.forEach(config._.keys(obj), key => {
                 switch(key) {
                     case 'color': {
@@ -149,8 +148,6 @@ module.exports = () => {
                 }
             });
 
-            console.log('actionList',actionList);
-
             if(!!reset) {
                 actionList['modifier'] = actions.defaultModifier;
             }
@@ -177,14 +174,39 @@ module.exports = () => {
             });
 
             str += `('${obj.value}')`;
-
-            console.log('str',str);
-            console.log(`${eval(str)}`);
             
             actionList = [];
             reset = false;
+
+            mixedStr.push(str);
+        });
+        
+        let finalStr = '';
+        config._.forEach(mixedStr, (str, i) => {
+
+            if(str.includes("('")) {
+                str = config._.replace(str, "('",'("');
+                str = config._.replace(str, "')",'")');
+            } 
+            
+            try {
+                eval(str);
+            } 
+            catch (err) { 
+                if(!!err) {
+                    str = config._.replace(str, '("',"('");
+                    str = config._.replace(str, '")',"')");
+                }
+            }
+            
+            if(i === mixedStr.length -1) {
+                finalStr += str;
+            } else {
+                finalStr += str + " +' '+ "; 
+            }
         });
 
+        console.log(base.getDateTime(), `${eval(finalStr)}`);
     };
 
     return actions;
