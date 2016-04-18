@@ -1,2 +1,4 @@
-install: npm install
+install:
+  - npm install
+  - brew upgrade node
 script: npm start
