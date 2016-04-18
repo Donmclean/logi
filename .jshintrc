@@ -3,5 +3,7 @@
   "moz": true,
   "eqeqeq": true,
   "undef": true,
-  "node": true
+  "node": true,
+  "sub":true,
+  "evil": true
 }

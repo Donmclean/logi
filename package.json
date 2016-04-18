@@ -4,17 +4,22 @@
   "description": "Module for logging in your node environment.",
   "main": "index.js",
   "scripts": {
-    "start": "node tests/tests.js"
+    "start": "gulp && node tests/tests.js",
+    "test": "node tests/tests.js"
   },
   "author": "Don Mclean",
   "license": "MIT",
-  "devDependencies": {
-    "q": "^1.4.1",
-    "q-io": "^1.13.2"
-  },
   "dependencies": {
     "chalk": "^1.1.1",
     "lodash": "^4.6.1",
     "moment": "^2.12.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-debug": "^2.1.2",
+    "gulp-jshint": "^2.0.0",
+    "gulp-load-plugins": "^1.2.2",
+    "jshint": "^2.9.1",
+    "jshint-stylish": "^2.1.0"
   }
 }
