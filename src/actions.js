@@ -53,15 +53,23 @@ module.exports = () => {
 
     };
 
-    //eg: [{color: 'red', bgColor: 'bgBlack', modifier: 'bold', value: 'this is a test'}]
+    //eg: [{color: 'red', bgColor: 'bgBlack', modifier: ['bold'], value: 'this is a test'}]
     actions.mixed = (arr) => {
         let
             mixedStr = [],
             actionList = [],
-            reset = false;
+            reset = false,
+            noOptions = false;
 
+        //ERROR CHECKING
         if(!config._.isArray(arr) || !arr) {
-            actions.error(`${arr} is not a valid argument`);
+            actions.error(`${arr} is not a valid argument > requires Array of Object/Objects *[{}]`);
+            return false;
+        } else if(config._.isEmpty(arr[0])) {
+            actions.error(`${arr} is empty *[{}]`);
+            return false;
+        } else if(!('value' in arr[0])) {
+            actions.error(`${arr} object needs a valid key of 'value'.`);
             return false;
         }
 
@@ -118,6 +126,13 @@ module.exports = () => {
                         let error = true;
                         actionList['modifier'] = [];
 
+                        if(!config._.isArray(obj.modifier)) {
+                            actionList['modifier'] = actions.defaultModifier;
+                            actions.error(`ERROR: LOGI > ${obj.modifier} should be an array []`);
+                            reset = true;
+                            return false;
+                        }
+
                         config._.forEach(actions.modifiers, modifier => {
                             config._.forEach(obj.modifier, modifier2 => {
                                 if(modifier === modifier2) {
@@ -162,6 +177,13 @@ module.exports = () => {
                 })
                 .value();
 
+            if(config._.isEmpty(options)) {
+
+                noOptions = true;
+                mixedStr.push(obj.value);
+                return true;
+            }
+
             let str = 'config.chalk.';
 
             config._.forEach(options, (task, i) => {
@@ -182,29 +204,43 @@ module.exports = () => {
         });
         
         let finalStr = '';
-        config._.forEach(mixedStr, (str, i) => {
 
-            if(str.includes("('")) {
-                str = config._.replace(str, "('",'("');
-                str = config._.replace(str, "')",'")');
-            } 
-            
+        if(!noOptions) {
+            config._.forEach(mixedStr, (str, i) => {
+
+                if(str.includes("('")) {
+                    str = config._.replace(str, "('",'("');
+                    str = config._.replace(str, "')",'")');
+                }
+
+                try {
+                    eval(str);
+                }
+                catch (err) {
+                    if(!!err) {
+                        str = config._.replace(str, '("',"('");
+                        str = config._.replace(str, '")',"')");
+                    }
+                }
+
+                if(i === mixedStr.length -1) {
+                    finalStr += str;
+                } else {
+                    finalStr += str + " +' '+ ";
+                }
+            });
+        } else {
+            finalStr = `"${mixedStr[0]}"`;
+
             try {
-                eval(str);
-            } 
-            catch (err) { 
+                eval(finalStr);
+            }
+            catch (err) {
                 if(!!err) {
-                    str = config._.replace(str, '("',"('");
-                    str = config._.replace(str, '")',"')");
+                    finalStr = `'${mixedStr[0]}'`;
                 }
             }
-            
-            if(i === mixedStr.length -1) {
-                finalStr += str;
-            } else {
-                finalStr += str + " +' '+ "; 
-            }
-        });
+        }
 
         console.log(base.getDateTime(), `${eval(finalStr)}`);
     };

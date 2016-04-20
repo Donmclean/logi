@@ -16,8 +16,17 @@ logi.error('ERROR LOG');
 //INFO LOG
 logi.info('INFO LOG');
 
+//TODO: FIX THIS
+
+logi.mixed([{}]);
+
+logi.mixed([{color: 'red', bgColor: 'bgGreen',modifier: ['underline']}]);
+
+logi.mixed([{value: 'this "is" a testlll'}]);
+logi.mixed([{value: "this 'is' a testccc"}]);
+
 logi.mixed([{color: 'red', bgColor: 'bgGreen',modifier: ['underline'], value: "this 'is' a testccc"}]);
 logi.mixed([{color: 'black', bgColor: 'bgRed', modifier: ['bold','underline'], value: 'this is "a" aaaaaaa'}]);
 
-logi.mixed([{color: 'red', bgColor: 'bgBlack',modifier: ['underline'], value: "this 'is' a testccc"},
+logi.mixed([{color: 'red', bgColor: 'bgBlack',modifier: 'underline', value: "this 'is' a testccc"},
     {color: 'blue', bgColor: 'bgBlack', modifier: ['bold','underline'], value: 'this is "a" aaaaaaa'}]);
