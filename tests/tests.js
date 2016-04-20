@@ -13,6 +13,9 @@ logi.warning('WARNING LOG');
 //ERROR LOG
 logi.error('ERROR LOG');
 
+//SUCCESS LOG
+logi.success('SUCCESS LOG');
+
 //INFO LOG
 logi.info('INFO LOG');
 
@@ -25,7 +28,7 @@ logi.mixed([{color: 'red', bgColor: 'bgGreen',modifier: ['underline']}]);
 logi.mixed([{value: 'this "is" a testlll'}]);
 logi.mixed([{value: "this 'is' a testccc"}]);
 
-logi.mixed([{color: 'red', bgColor: 'bgGreen',modifier: ['underline'], value: "this 'is' a testccc"}]);
+logi.mixed([{color: 'red', bgColor: 'bgGreen', modifier: ['underline'], value: "this 'is' a testrrr"}]);
 logi.mixed([{color: 'black', bgColor: 'bgRed', modifier: ['bold','underline'], value: 'this is "a" aaaaaaa'}]);
 
 logi.mixed([{color: 'red', bgColor: 'bgBlack',modifier: 'underline', value: "this 'is' a testccc"},

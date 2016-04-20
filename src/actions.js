@@ -46,6 +46,12 @@ module.exports = () => {
 
     };
 
+    actions.success = (str) => {
+
+        console.log(base.getDateTime(), base.makeGreen(str));
+
+    };
+
 
     actions.info = (str) => {
 

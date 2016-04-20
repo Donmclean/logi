@@ -26,6 +26,11 @@ module.exports = () => {
         return config.chalk.red(str);
     };
 
+    base.makeGreen = (str) => {
+
+        return config.chalk.green(str);
+    };
+
     base.makeBlue = (str) => {
 
         return config.chalk.blue(str);
