@@ -33,11 +33,11 @@ logi.info('INFO LOG');
 
 **Customized Logging**
 
-`logi.mixed()` utilizes the main features of [chalk js](https://github.com/chalk/chalk) in an attempt to simple the logging experience.
+`logi.mixed()` utilizes the main features of [chalk js](https://github.com/chalk/chalk) in an attempt to simplify the logging experience.
 
 
 **Examples**
-pass in an arr of objects in this format
+pass in an array of objects in this format
 
 ```
 options = [{
@@ -45,9 +45,17 @@ options = [{
     bgColor: 'bgWhite',
     modifier: ['strikethrough'],
     value: "this 'is' a testccc"
-}]
+},
+{
+    color: 'black',
+    bgColor: 'bgWhite',
+    modifier: ['strikethrough'],
+    value: "this 'is' a testccc"
+}];
 
 logi.mixed(options);
 ```
-result: ~~this is a~~
+**result:** 
+~~this is a~~
+~~this is a~~
 
