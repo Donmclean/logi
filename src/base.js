@@ -35,6 +35,60 @@ module.exports = () => {
 
         return config.chalk.blue(str);
     };
+    
+    base.sanitizeString = (str) => {
+        let backslashCaseEntered = false;
+        
+        // if(config._.includes(str, "\'") || config._.includes(str, '\"')) {
+        //     console.log('slash found..');
+        //    
+        //    
+        // }
+
+        config._.forEach(str, (char, i) => {
+
+            switch (char) {
+                case '\n': {
+                    str = str.replace(char, '\\n');
+                    break;
+                }
+                case '\r': {
+                    str = str.replace(char, '\\r');
+                    break;
+                }
+                case '\b': {
+                    str = str.replace(char, '\\b');
+                    break;
+                }
+                case '\t': {
+                    str = str.replace(char, '\\t');
+                    break;
+                }
+                case '\v': {
+                    str = str.replace(char, '\\v');
+                    break;
+                }
+                case '\f': {
+                    str = str.replace(char, '\\f');
+                    break;
+                }
+                case '\"': {
+                    str = str.replace(char, '\"');
+                    str = str.replace(char, '\'');
+
+                    break;
+                }
+                case '\\': {
+
+                    str = str.replace(char, '\\\\\\\\');
+                    break;
+                }
+            }
+
+        });
+
+        return str;
+    };
 
     return base;
 };

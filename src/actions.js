@@ -183,8 +183,11 @@ module.exports = () => {
                 })
                 .value();
 
-            if(config._.isEmpty(options)) {
+            //Sanitize Str for line breaks, carriage returns etc * \n, \r*
+            obj.value = base.sanitizeString(obj.value);
 
+            if(config._.isEmpty(options)) {
+                
                 noOptions = true;
                 mixedStr.push(obj.value);
                 return true;
