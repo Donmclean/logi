@@ -5,9 +5,13 @@ Module for logging in your node environment.
 
 # How To Use
 
+###### Install it
+
+`npm install --save-dev https://github.com/Donmclean/logi`
+
 ###### Require it
 
-`const logi = require('node_modules/logi/index');`
+`const logi = require('logi');`
 
 ###### API
 
