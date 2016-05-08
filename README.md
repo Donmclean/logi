@@ -36,7 +36,8 @@ logi.info('INFO LOG');
 `logi.mixed()` utilizes the main features of [chalk js](https://github.com/chalk/chalk) in an attempt to simplify the logging experience.
 
 
-**Examples**
+**Example 1**
+
 pass in an array of objects in this format
 
 ```
@@ -44,18 +45,36 @@ options = [{
     color: 'black',
     bgColor: 'bgWhite',
     modifier: ['strikethrough'],
-    value: "this 'is' a testccc"
+    value: "this is a test 1"
 },
 {
     color: 'black',
     bgColor: 'bgWhite',
-    modifier: ['strikethrough'],
-    value: "this 'is' a testccc"
+    modifier: ['italic'],
+    value: "this is a test 2"
 }];
 
 logi.mixed(options);
 ```
 **result:** 
-~~this is a~~
-~~this is a~~
 
+~~this is a test 1~~ _this is a test 2_
+
+
+**Example 2**
+
+**value** is the only _required_ parameter in the options object
+
+```
+options = [{value: "basic log"}]
+```
+**result:** 
+
+basic log
+
+```
+options = [{value: "basic log"},{value: "multiple values on same line"}]
+```
+**result:** 
+
+basic log multiple values on same line
