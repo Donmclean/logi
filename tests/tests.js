@@ -7,22 +7,27 @@ const logi = require('../index');
 //BASIC LOG
 logi.log('BASIC LOG');
 logi.log('"BASIC LOG"');
+logi.log('BASIC LOG', {value: 'testtt'});
 
 //WARNING LOG
 logi.warning('WARNING LOG');
 logi.warning('"WARNING LOG"');
+logi.warning('WARNING LOG', {value: 'testtt'});
 
 //ERROR LOG
 logi.error('ERROR LOG');
 logi.error('"ERROR LOG"');
+logi.error('ERROR LOG', ['testtt',{value: 'testtt'}]);
 
 //SUCCESS LOG
 logi.success('SUCCESS LOG');
 logi.success('"SUCCESS LOG"');
+logi.success('SUCCESS LOG', ['testtt', {value: 'testtt'}]);
 
 //INFO LOG
 logi.info('INFO LOG');
 logi.info('"INFO LOG"');
+logi.info('INFO LOG', [3,3,3], {});
 
 logi.mixed([{}]);
 logi.mixed([]);

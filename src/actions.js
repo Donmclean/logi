@@ -28,39 +28,94 @@ module.exports = () => {
 
     actions.requiredKeys = ['color', 'bgColor', 'modifier', 'value'];
 
-    actions.log = (str) => {
+    actions.log = function (str) {
 
-        console.log(base.getDateTime(), str);
-
-    };
-
-    actions.warning = (str) => {
-
-        console.log(base.getDateTime(), base.makeYellow(str));
+        let args = Array.prototype.slice.call(arguments);
+        args.unshift(base.getDateTime());
+        console.log.apply(console, args);
 
     };
 
-    actions.error = (str) => {
+    actions.warning = function (str) {
 
-        console.log(base.getDateTime(), base.makeRed(str));
+        let args = Array.prototype.slice.call(arguments);
+        args.unshift(base.getDateTime());
+
+        let newArgs = [];
+        config._.forEach(args, (arg,i) => {
+            if(i > 0) {
+                if(config._.isString(arg)) {
+                    arg = base.makeYellow(arg);
+                }
+            }
+            newArgs.push(arg);
+        });
+
+        console.log.apply(console, newArgs);
 
     };
 
-    actions.success = (str) => {
+    actions.error = function (str) {
 
-        console.log(base.getDateTime(), base.makeGreen(str));
+        let args = Array.prototype.slice.call(arguments);
+        args.unshift(base.getDateTime());
+
+        let newArgs = [];
+        config._.forEach(args, (arg,i) => {
+            if(i > 0) {
+                if(config._.isString(arg)) {
+                    arg = base.makeRed(arg);
+                }
+            }
+            newArgs.push(arg);
+        });
+
+        console.log.apply(console, newArgs);
+
+    };
+
+    actions.success = function (str) {
+
+        let args = Array.prototype.slice.call(arguments);
+        args.unshift(base.getDateTime());
+
+        let newArgs = [];
+        config._.forEach(args, (arg,i) => {
+            if(i > 0) {
+                if(config._.isString(arg)) {
+                    arg = base.makeGreen(arg);
+                }
+            }
+            newArgs.push(arg);
+        });
+
+        console.log.apply(console, newArgs);
 
     };
 
 
-    actions.info = (str) => {
+    actions.info = function (str) {
 
-        console.log(base.getDateTime(), base.makeBlue(str));
+        let args = Array.prototype.slice.call(arguments);
+        args.unshift(base.getDateTime());
+
+        let newArgs = [];
+        config._.forEach(args, (arg,i) => {
+            if(i > 0) {
+                if(config._.isString(arg)) {
+                    arg = base.makeBlue(arg);
+                }
+            }
+            newArgs.push(arg);
+        });
+
+        console.log.apply(console, newArgs);
 
     };
 
     //eg: [{color: 'red', bgColor: 'bgBlack', modifier: ['bold'], value: 'this is a test'}]
     actions.mixed = (arr) => {
+        
         let
             mixedStr = [],
             actionList = [],
@@ -192,13 +247,13 @@ module.exports = () => {
             let str = 'config.chalk.';
 
             if(config._.isEmpty(options)) {
-                
+
                 noOptions = true;
 
                 str += 'reset';
                 str += `('${obj.value}')`;
                 mixedStr.push(str);
-                
+
                 return true;
             }
 
@@ -212,13 +267,13 @@ module.exports = () => {
             });
 
             str += `('${obj.value}')`;
-            
+
             actionList = [];
             reset = false;
 
             mixedStr.push(str);
         });
-        
+
         let finalStr = '';
 
         config._.forEach(mixedStr, (str, i) => {
