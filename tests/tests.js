@@ -26,12 +26,14 @@ logi.info('"INFO LOG"');
 
 logi.mixed([{}]);
 logi.mixed([]);
+logi.mixed(['value']);
 logi.mixed();
 logi.mixed('test string');
 logi.mixed('"test string"');
 
 logi.mixed([{value: 'this "is" a testlll'}]);
 logi.mixed([{value: "this 'is' a testccc"}]);
+logi.mixed([{value: "this 'is' a testccc"},{value: "this 'is' a testccc"}]);
 
 logi.mixed([{value: "this 'is' a\n testccc"}]);
 logi.mixed([{value: "this 'is' a\t testccc"}]);
@@ -69,3 +71,12 @@ logi.mixed([{color: 'red', bgColor: 'bgBlack',modifier: ['underline'], value: "t
 
 logi.mixed([{color: 'red', bgColor: 'bgBlack',modifier: ['underline'], value: "this 'is' a testccc"},
     {color: 'blue', bgColor: 'bgBlack', modifier: ['bold','underline']}]);
+logi.mixed([{value: "Collecting task...:"}]);
+logi.mixed([{value: "Collecting task 1"},{value: "Collecting task 2"},{value: "Collecting task 3"},{value: "Collecting task 4"}]);
+logi.mixed([{value: "Collecting task:"},
+    {color: 'yellow', modifier: ['strikethrough'], value: 'mediaaaa'},
+    {color: 'yellow', modifier: ['strikethrough'], value: 'medixxxxaaaa'},
+    {value: "Collecting task:"}]);
+
+logi.mixed([{value: "Collecting task...:"}, []]);
+logi.mixed([{value: "Collecting task...:"}, {value: {}}]);

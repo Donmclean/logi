@@ -69,13 +69,16 @@ module.exports = () => {
 
         //ERROR CHECKING
         if(!config._.isArray(arr) || !arr) {
-            actions.error(`${arr} is not a valid argument > requires Array of Object/Objects *[{}]`);
+            actions.error(`ERROR: LOGI > ${arr} is not a valid argument > requires Array of Object/Objects *[{}]`);
             return false;
         } else if(config._.isEmpty(arr[0])) {
-            actions.error(`${arr} is empty *[{}]`);
+            actions.error(`ERROR: LOGI > ${arr} is empty *[{}]`);
+            return false;
+        } else if(!config._.isObject(arr[0])) {
+            actions.error(`ERROR: LOGI > ${arr} requires Array of Object/Objects *[{}]`);
             return false;
         } else if(!('value' in arr[0])) {
-            actions.error(`${arr} object needs a valid key of 'value'.`);
+            actions.error(`ERROR: LOGI > ${arr} object needs a valid key of 'value'.`);
             return false;
         }
 
@@ -186,14 +189,18 @@ module.exports = () => {
             //Sanitize Str for line breaks, carriage returns etc * \n, \r*
             obj.value = base.sanitizeString(obj.value);
 
+            let str = 'config.chalk.';
+
             if(config._.isEmpty(options)) {
                 
                 noOptions = true;
-                mixedStr.push(obj.value);
+
+                str += 'reset';
+                str += `('${obj.value}')`;
+                mixedStr.push(str);
+                
                 return true;
             }
-
-            let str = 'config.chalk.';
 
             config._.forEach(options, (task, i) => {
                 task = task.replace(',','.');
@@ -214,42 +221,29 @@ module.exports = () => {
         
         let finalStr = '';
 
-        if(!noOptions) {
-            config._.forEach(mixedStr, (str, i) => {
+        config._.forEach(mixedStr, (str, i) => {
 
-                if(str.includes("('")) {
-                    str = config._.replace(str, "('",'("');
-                    str = config._.replace(str, "')",'")');
-                }
-
-                try {
-                    eval(str);
-                }
-                catch (err) {
-                    if(!!err) {
-                        str = config._.replace(str, '("',"('");
-                        str = config._.replace(str, '")',"')");
-                    }
-                }
-
-                if(i === mixedStr.length -1) {
-                    finalStr += str;
-                } else {
-                    finalStr += str + " +' '+ ";
-                }
-            });
-        } else {
-            finalStr = `"${mixedStr[0]}"`;
+            if(str.includes("('")) {
+                str = config._.replace(str, "('",'("');
+                str = config._.replace(str, "')",'")');
+            }
 
             try {
-                eval(finalStr);
+                eval(str);
             }
             catch (err) {
                 if(!!err) {
-                    finalStr = `'${mixedStr[0]}'`;
+                    str = config._.replace(str, '("',"('");
+                    str = config._.replace(str, '")',"')");
                 }
             }
-        }
+
+            if(i === mixedStr.length -1) {
+                finalStr += str;
+            } else {
+                finalStr += str + " +' '+ ";
+            }
+        });
 
         console.log(base.getDateTime(), `${eval(finalStr)}`);
     };
