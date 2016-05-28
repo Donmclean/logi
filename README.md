@@ -89,3 +89,15 @@ logi.mixed(options);
 **result:** 
 
 basic log multiple values on same line
+
+
+###### OPTIONS
+
+format
+Type: string
+Default: `'default'`
+Example: `{format: 'gulp'}`
+
+list of possible formatting options are: 
+`'default'`
+`'gulp'`
