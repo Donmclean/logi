@@ -14,7 +14,7 @@ Module for logging in your node environment.
 `const logi = require('logi')();`
 
 ###### Require it with options
-`const options = {format: 'gulp'} // *See API for more options*`
+`const options = {format: 'gulp'} // *See OPTIONS for more*`
 
 `const logi = require('logi')(options);`
 
