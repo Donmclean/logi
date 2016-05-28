@@ -79,14 +79,14 @@ options = [{value: "basic log"}]
 logi.mixed(options);
 ```
 **result:** 
-basic log
+`basic log`
 
 ```
 options = [{value: "basic log"},{value: "multiple values on same line"}]
 logi.mixed(options);
 ```
 **result:** 
-basic log multiple values on same line
+`basic log multiple values on same line`
 
 
 ###### OPTIONS
