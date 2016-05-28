@@ -7,11 +7,19 @@ module.exports = () => {
         base = {},
         config = require('./config')();
 
-    base.getDateTime = () => {
+    base.getDateTime = (format) => {
 
         let date = Date.now();
 
-        date = config.moment(date).format('MM/DD/YY ~ HH:mm:ss');
+        switch (format) {
+            case 'gulp': {
+                date = config.moment(date).format('HH:mm:ss');
+                break;
+            }
+            default: {
+                date = config.moment(date).format('MM/DD/YY ~ HH:mm:ss');
+            }
+        }
 
         return `[${config.chalk.gray(date)}]`;
     };

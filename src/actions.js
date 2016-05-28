@@ -1,12 +1,31 @@
 /**
  * Created by donmclean on 3/13/16.
  */
-module.exports = () => {
+module.exports = (options) => {
     "use strict";
     const
         actions = {},
         config = require('./config')(),
         base = require('./base')();
+
+    //Validate options
+    if(config._.isObject(options)) {
+
+        if('format' in options) {
+            config._.forEach(options, option => {
+
+                switch (option) {
+                    case 'gulp': {
+                        actions.format = 'gulp';
+                        break
+                    }
+                    default: {
+                        actions.format = 'default';
+                    }
+                }
+            });
+        }
+    }
 
     actions.defaultColor = 'white';
 
@@ -31,7 +50,7 @@ module.exports = () => {
     actions.log = function (str) {
 
         let args = Array.prototype.slice.call(arguments);
-        args.unshift(base.getDateTime());
+        args.unshift(base.getDateTime(actions.format));
         console.log.apply(console, args);
 
     };
@@ -39,7 +58,7 @@ module.exports = () => {
     actions.warning = function (str) {
 
         let args = Array.prototype.slice.call(arguments);
-        args.unshift(base.getDateTime());
+        args.unshift(base.getDateTime(actions.format));
 
         let newArgs = [];
         config._.forEach(args, (arg,i) => {
@@ -58,7 +77,7 @@ module.exports = () => {
     actions.error = function (str) {
 
         let args = Array.prototype.slice.call(arguments);
-        args.unshift(base.getDateTime());
+        args.unshift(base.getDateTime(actions.format));
 
         let newArgs = [];
         config._.forEach(args, (arg,i) => {
@@ -77,7 +96,7 @@ module.exports = () => {
     actions.success = function (str) {
 
         let args = Array.prototype.slice.call(arguments);
-        args.unshift(base.getDateTime());
+        args.unshift(base.getDateTime(actions.format));
 
         let newArgs = [];
         config._.forEach(args, (arg,i) => {
@@ -97,7 +116,7 @@ module.exports = () => {
     actions.info = function (str) {
 
         let args = Array.prototype.slice.call(arguments);
-        args.unshift(base.getDateTime());
+        args.unshift(base.getDateTime(actions.format));
 
         let newArgs = [];
         config._.forEach(args, (arg,i) => {
@@ -300,7 +319,7 @@ module.exports = () => {
             }
         });
 
-        console.log(base.getDateTime(), `${eval(finalStr)}`);
+        console.log(base.getDateTime(actions.format), `${eval(finalStr)}`);
     };
 
     return actions;

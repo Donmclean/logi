@@ -2,7 +2,7 @@
  * Created by donmclean on 3/13/16.
  */
 "use strict";
-const logi = require('../index');
+const logi = require('../index')({format: 'gulp'});
 
 //BASIC LOG
 logi.log('BASIC LOG');
